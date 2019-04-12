@@ -22,8 +22,10 @@ public class UsersController {
         return "users/confirmation";
     }
 
+
     @RequestMapping("/details")
     public String details() {
-        return "users/idetails";
+        return "users/details";
     }
+
 }
