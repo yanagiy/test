@@ -1,30 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www/thymeleaf.org">
 <head>
-<meta charset="UTF-8">
+<!--  <link rel="stylesheet" type="text/css" href="css/top.css">-->
+<link rel="stylesheet" media="all" th:href="@{/css/top.css}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>users_TOP画面</title>
 </head>
 <body>
+<h2>TOP画面</h2>
 
-<center>
-<h1>TOP画面</h1>
-</center>
+    <form method="POST" name="user" action="/top" accept-charset="UTF8" th:value="result">
+    <div th:each="list:${list}">
+        <input type="submit" onclick="dataDelete('user')" name="user" th:value="${list.id}">
+        <input type="submit" th:value="${list.id}">
+        <a href="/input" >ID</a><span th:text="${list.id}"></span>
+        <a>年齢</a><span th:text="${list.age}"></span>
+        <a>名前</a><span th:text="${list.name}"></span><button onclick="dataDelete('user')">削除</button>
+    </div>
 
-<input type="radio" onClick="alertNumber();" id="id" value="01"name="top" >
-<Label>test</Label><br>
+    </form>
 
-<input type="radio" onClick="alertNumber();" id="id" value="01"name="top" >
-<Label>test</Label><br>
+    <button onclick="location.href='./details'">詳細</button>
+    <button onclick="location.href='./input'">登録</button>
 
-<input type="radio" onClick="alertNumber();" id="id" value="01"name="top" >
-<Label>test</Label><br>
+    <!--
+    <a class="btn btn-default" href="/User/${list.id}" th:href="@{/User/{id}(id=${list.id})}" th:text="${item.id}">1</a>
+    <a href="javascript:void(0);" onclick="destory_func();">削除</a>
+     -->
 
-<div align="right">
-<input type="button" value="詳細">
-<input type="button" value="登録">
-<input type="button" value="削除">
-</div>
+     <button onclick="dataDelete('user')">削除</button>
 
+<script th:inline="javascript">
+
+
+function dataDelete(name){
+      //ラジオボタンオブジェクトを取得する
+      var submits = document.getElementsByName(name);
+
+      //取得したラジオボタンオブジェクトから選択されたものを探し出す
+      var result;
+      for(var i=0; i<submits.length; i++){
+        if (submits[i].checked) {
+          //選択されたラジオボタンのvalue値を取得する
+          result = submits[i].value;
+          break;
+        }
+      }
+
+      //value値を表示する
+      alert("idは" + result + "です");
+      console.log(result);
+    //ラジオボタンをformにまぜて行っていきます。
+
+    doucument
+}
+
+</script>
 </body>
 </html>
 
