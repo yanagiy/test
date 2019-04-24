@@ -3,28 +3,38 @@
  */
 package com.example.mapper;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class User {
+    @Min(0)
+    @Max(10)
     @NotNull
-    @Size(min = 1)
-    private int id;
-    @Size(max = 100)
-    private int age;
-    @Size(max = 30)
+    public Integer id;
+    @Min(0)
+    @Max(10)
+    @NotNull
+    public Integer age;
+    @Size(min = 1, max = 20)
+    @NotEmpty
     private String name;
-    @Size(max = 100)
+    @NotEmpty
+    @Size(min = 1, max = 20)
     private String address;
-    @Size(max = 100)
+    @NotEmpty
+    @Size(min = 1, max = 20)
     private String tell;
-    @Size(max = 100)
+    @NotEmpty
+    @Size(min = 1, max = 20)
     private String mail;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
     public String getName() {
@@ -40,10 +50,10 @@ public class User {
         return mail;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
     public void setName(String name) {

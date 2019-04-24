@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +40,7 @@ public class UserController{
     }
     //保存用テスト。
     @RequestMapping(path = "/test/{user}", method = RequestMethod.GET)
-    String test(Model model, @PathVariable("id") User user) {
+    String test(Model model, @PathVariable("user") User user) {
         jdbcTemplate.update("insert into users values (?),(?),(?),(?),(?),(?)",
                 user.getId(),
                 user.getAge(),
@@ -58,12 +60,17 @@ public class UserController{
 
     @RequestMapping(path ="top/input", method = RequestMethod.GET)
     String input(Model model, User user) {
-        model.addAttribute("User", user);
+        model.addAttribute("user", user);
         return "users/input";
     }
 
+    // ModelAttribute = 自動でUser(返り値)がModelに入ってくる。
+    // BindingResult = @ModelAttributeを付けた引き数の後ろ側でないと反応しない？？、Validation取得用
     @RequestMapping(path="top/input/confirmation", method=RequestMethod.POST )
-    String confirmation( Model model, User user) {
+    String confirmation( Model model, @Validated  User user,BindingResult result) {
+        if(result.hasErrors()) {
+            return "users/input";
+        }
         model.addAttribute("user", user);
         return "users/confirmation";
     }
