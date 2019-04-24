@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+<link rel="stylesheet" media="all" th:href="@{/css/top.css}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>詳細画面</title>
+</head>
+<body>
+<h2>詳細画面</h2>
+    <div th:each="list:${list}">
+        <a>ID</a><p th:text="*{list.id}"></p>
+        <a>年齢</a><p th:text="*{list.age}"></p>
+        <a>名前</a><p th:text="*{list.name}"></p>
+        <a>住所</a><p th:text="*{list.address}"></p>
+        <a>電話</a><p th:text="*{list.tell}"></p>
+        <a>メールアドレス</a><p th:text="*{list.mail}"></p>
+    </div>
+<button onclick="location.href='http://localhost:8080/top'">TOP</button>
+</body>
+</html>

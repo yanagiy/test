@@ -30,32 +30,41 @@ public class UserController{
         return "users/top";
     }
 
-    //@PathVariable "{id}の部分を取得している。"
-    @RequestMapping(path = "/top{id}", method = RequestMethod.GET)
+    //@PathVariable URLからデータ取得 "{id}の部分を取得している。"
+    @RequestMapping(path = "top/delete/{id}", method = RequestMethod.GET)
     String delete(Model model, @PathVariable("id") int id) {
-        jdbcTemplate.update("delete from user where id = ? ", id);
-        List<User> list = jdbcTemplate.queryForObject("select * from users", new UserMapper());
-        model.addAttribute("list", list);
-         return "redirect:/top";
-        //return "users/top";
+        jdbcTemplate.update("delete from users where id = ? ", id);
+        return "redirect:/top";
+    }
+    //保存用テスト。
+    @RequestMapping(path = "/test/{user}", method = RequestMethod.GET)
+    String test(Model model, @PathVariable("id") User user) {
+        jdbcTemplate.update("insert into users values (?),(?),(?),(?),(?),(?)",
+                user.getId(),
+                user.getAge(),
+                user.getName(),
+                user.getAddress(),
+                user.getTell(),
+                user.getMail());
+        return "redirect:/top";
     }
 
-    @RequestMapping(path ="/input", method = RequestMethod.GET)
-    String input() {
+    @RequestMapping(value = "top/detail/{id}", method = RequestMethod.GET)
+    String detail(Model model, @PathVariable("id") int id) {
+        List<User> list = jdbcTemplate.queryForObject("select * from users where id = ?", new UserMapper(), id);
+        model.addAttribute("list", list);
+        return "users/detail";
+    }
+
+    @RequestMapping(path ="top/input", method = RequestMethod.GET)
+    String input(Model model, User user) {
+        model.addAttribute("User", user);
         return "users/input";
     }
-    //@RequestMapping(path ="/details", method = RequestMethod.GET)
-    /*String details(Model model/*@PathVariable("id") int id*///) {
-       /* List<User> list = jdbcTemplate.queryForObject("select * from users", new UserMapper());
-        model.addAttribute("list", list);
-        return "users/details";
-    }*/
 
-    @RequestMapping(value = "details/{id", method = RequestMethod.GET)
-    String details(Model model, @PathVariable("id") int id) {
-        //List<User> list = jdbcTemplate.queryForObject("select from user where id",id);
-        List<User> list = jdbcTemplate.queryForObject("select * from users", new UserMapper());
-        model.addAttribute("list", list);
-        return "users/details";
+    @RequestMapping(path="top/input/confirmation", method=RequestMethod.POST )
+    String confirmation( Model model, User user) {
+        model.addAttribute("user", user);
+        return "users/confirmation";
     }
 }

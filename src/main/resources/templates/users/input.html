@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+<link rel="stylesheet" media="all" th:href="@{/css/top.css}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--  <meta http-equiv="Content-Type" content="input/html; charset=UTF-8" /> -->
+<title>登録画面</title>
+</head>
+<body>
+<!-- https://ksby.hatenablog.com/entry/2015/02/12/022510 -->
+    <form action="/top/input/confirmation" th:object="${User}" method="POST">
+    <!-- 入力フォーム表示 -->
+        <Label>ID</Label><br>
+        <input type="text" placeholder="ID" th:field="*{id}"  value=" "><br>
+
+        <Label>年齢</Label><br>
+        <input type="text" placeholder="年齢" th:field="*{age}"><br>
+
+        <Label>名前</Label><br>
+        <input type="text"  placeholder="名前" th:field="*{name}"value=" 100" name="age" id="age" ><br>
+
+        <Label>住所</Label><br>
+        <input type="text" placeholder="住所" th:field="*{address}"><br>
+
+        <Label>電話番号</Label><br>
+        <input type="text" placeholder="電話番号"th:field="*{tell}"><br>
+
+        <Label>メールアドレス</Label><br>
+        <input type="text" placeholder="メールアドレス"th:field="*{mail}"><br>
+
+        <div align="right">
+            <input type="submit"value="確認" class="btn btn-warning" >
+        </div>
+        <input type="hidden" th:id="${id}">
+    </form>
+
+    <div align="right">
+    <button onclick="location.href='http://localhost:8080/top'">TOP</button>
+    </div>
+<script th:inline="javascript">
+function alertData(){
+    alert("テストアラート");
+}
+</script>
+
+</body>
+</html>

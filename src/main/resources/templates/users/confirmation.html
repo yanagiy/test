@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+<link rel="stylesheet" media="all" th:href="@{/css/top.css}"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>確認画面</title>
+</head>
+<body>
+    <div th:object="${user}">
+        <form method="GET" action="test/{${user}" th:action="@{/test/{user}(user=${user})}" >
+            <p>id</p>
+            <span th:text="*{id}"></span>
+            <p>年齢</p>
+            <span th:text="*{age}"></span>
+            <p>名前</p>
+            <span th:text="*{name}"></span>
+            <p>住所</p>
+            <span th:text="*{address}"></span>
+            <p>電話</p>
+            <span th:text="*{tell}"></span>
+            <p>メール</p>
+            <span th:text="*{mail}"></span>
+
+            <input type="submit"value="登録" class="btn btn-warning"  th:href="@{/test/{user}(user=${user})}">
+        </form>
+        <input type="hidden" th:id="${user}">
+    </div>
+
+
+    <input type="button" onclick="history.back()" value="戻る">
+    <button onclick="location.href='http://localhost:8080/top'">保存</button>
+</body>
+</html>

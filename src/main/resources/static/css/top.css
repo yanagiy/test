@@ -1,0 +1,13 @@
+@charset "UTF-8";
+@charset "shift-jis";
+
+h2{
+    font-size:40px;
+    color:red;
+    text-align: center;
+}
+div{
+    font-size: 20px;
+    white-space: nowrap;
+    text-alin: left;
+}

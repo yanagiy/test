@@ -4,45 +4,37 @@
 <!--  <link rel="stylesheet" type="text/css" href="css/top.css">-->
 <link rel="stylesheet" media="all" th:href="@{/css/top.css}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>users_TOP画面</title>
+<title>TOP画面</title>
 </head>
 <body>
 <h2>TOP画面</h2>
-    <!-- <form name = "del" action="/top{id}" method="POST"  th:href="@{/top/{id}(id=${list.id})">  -->
-    <form name = "del"  method="POST">
-        <div th:each="list:${list}">
-            <!-- <input type="submit" onclick="dataDelete('user')" name="user" th:value="${list.id}"> -->
-            <input type="button" onclick="dataDelete('user')" id ="user" th:value="${list.id}">
-            <!--<input type="button" value="削除" name="user" onclick="dataDelete('user')" >-->
-            <a>ID</a><span th:text="${list.id}"></span>
-            <a th:href="@{/details/{id}(id=${list.id})}">ID</a><span th:text="${list.id}"></span>
-            <a>年齢</a><span th:text="${list.age}"></span>
-            <a>名前</a><span th:text="${list.name}"></span>
+    <div th:each="list:${list}">
+        <form method="GET" name="del" action="top/delete/{${list.id}" th:action="@{/top/delete/{id}(id=${list.id})}">
+            <a class="btn btn-warning" href="top/detail/${list.id}" th:href="@{/top/detail/{id}(id=${list.id})}">ID</a>
+            <span th:text="${list.id}"></span>
+
+            <Label>年齢</Label>
+            <span th:text="${list.age}"></span>
+
+            <Label>名前</Label>
+            <span th:text="${list.name}"></span>
+
+            <input type="submit"value="削除ボタン" class="btn btn-warning"  th:href="@{/top/delete/{id}(id=${list.id})}">
+        </form>
         <input type="hidden" th:id="${list.id}">
-        </div>
-        <!-- http://m-shige1979.hatenablog.com/entry/2016/12/07/080000 -->
+    </div>
 
-    </form>
-    <button onclick="location.href='./details'">詳細</button>
-    <button onclick="location.href='./input'">登録</button>
-
-    <!-- <input type="radio" onClick="dataDelete('user')" name="user" th:value="${list.id}"> -->
-
-    <!--
-    <a class="btn btn-default" href="/User/${list.id}" th:href="@{/User/{id}(id=${list.id})}" th:text="${item.id}">1</a>
-    <a href="javascript:void(0);" onclick="destory_func();">削除</a>
-     -->
+    <!-- 直前のページに戻る -->
+    <input type="button" onclick="history.back()" value="戻る">
+    <button onclick="location.href='top/input'">登録</button>
 
 <script th:inline="javascript">
 //データ取得
-function dataDelete(id){
-    var button= document.getElementById(id).value;
-    alert(button);
-
-    document.del.submit("button");
-    var result;
-}
-
+//function deleteData(id){
+//    var button= document.getElementById(id).value;
+//    alert(button);
+//    document.del.submit("button");
+//}
 </script>
 </body>
 </html>
